@@ -1,0 +1,20 @@
+{
+  "name": "preentrega2",
+  "version": "1.0.0",
+  "description": "",
+  "type": "module",
+  "main": "app.js",
+  "scripts": {
+    "start": "nodemon src/app.js"
+  },
+  "author": "Leo",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.2",
+    "express-handlebars": "^7.1.2",
+    "handlebars": "^4.7.8",
+    "mongoose": "^7.6.3",
+    "nodemon": "^3.0.1",
+    "socket.io": "^4.7.2"
+  }
+}
