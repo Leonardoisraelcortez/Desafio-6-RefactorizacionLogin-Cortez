@@ -9,8 +9,29 @@ import { Server } from 'socket.io';
 import ProductManager from './dao/managers/MongoDb/productManager.js';
 import cartmanager from './dao/managers/MongoDb/cartmanager.js';
 import dbConnection from './dao/db/configDB.js';
+import cookieParser from 'cookie-parser';
+import viewsRouter from './router/views.router.js';
+import session from 'express-session';
+import FileStore from 'session-file-store';
+import MongoStore from 'connect-mongo';
+import usersRouter from './router/users.router.js';
 
 const app = express();
+
+const URI =
+"mongodb+srv://leonardoisraelcortez:xOvbuIBDknKVq0Ge@micluster.vjzdtbr.mongodb.net/ecommerce?retryWrites=true&w=majority";
+
+app.use(
+    session({
+        secret: "secreto",
+        cookie: {
+            maxAge: 60 * 60 * 1000,
+        },
+        store: new MongoStore({
+            mongoUrl: URI,
+        }),
+    })
+);
 
 (async () => {
 try {
@@ -40,6 +61,10 @@ app.set('views', __dirname + '/views');
 app.set('view engine', 'handlebars');
 
 app.use('/', router);
+
+app.use("/api/users", usersRouter);
+app.use('/', viewsRouter)
+
 
 app.get('/products', async (req, res) => {
 try {
@@ -114,4 +139,16 @@ socket.on('disconnect', () => {
 });
 });
 
+//const fileStore = FileStore(session);
+//app.use(session({
+//    secret: "secreto",
+//    cookie: {
+//        maxAge: 60 + 60 + 1000,
+//    },
+//    store: new fileStore(
+//        {
+//            path: __dirname + '/sessions',
+//        }
+//    ),
+//}));
 

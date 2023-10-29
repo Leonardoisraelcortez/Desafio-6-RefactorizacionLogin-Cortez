@@ -4,6 +4,20 @@ import Carts from '../dao/db/models/carts.model.js'
 
 const viewsRouter = Router();
 
+viewsRouter.get('/', (req, res) => {
+    res.render('login');
+})
+
+viewsRouter.get("/signup", (req, res) => {
+    res.render("signup");
+});
+
+viewsRouter.get("/home", (req, res) => {
+    console.log("req", req);
+    const { email, first_name } = req.session;
+    res.render("home", { email, first_name });
+});
+
 viewsRouter.get('/products', async (req, res) => {
 try {
     const products = await Product.find();
