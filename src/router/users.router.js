@@ -22,4 +22,15 @@ router.post("/signup", async (req, res) => {
     res.status(200).json({ message: "usuario creado", createdUser });
 });
 
+router.get("/logout", (req, res) => {
+    console.log("Ruta de logout alcanzada");
+    req.session.destroy((err) => {
+        if (err) {
+            console.error("Error al cerrar la sesión:", err);
+        }
+        res.redirect("/");
+    });
+});
+
+
 export default router
