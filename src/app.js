@@ -15,6 +15,9 @@ import session from 'express-session';
 import FileStore from 'session-file-store';
 import MongoStore from 'connect-mongo';
 import usersRouter from './router/users.router.js';
+import passport from 'passport';
+import "./passport.js";
+
 
 const app = express();
 
@@ -94,10 +97,10 @@ try {
 app.use('/api/products', productsRouter);
 app.use('/api/carts', cartsRouter);
 
+const PORT = 3000;
+
 app.use(passport.initialize());
 app.use(passport.session());
-
-const PORT = 3000;
 
 const httpServer = app.listen(PORT, () => {
 console.log(`Escuchando al puerto ${PORT}`);

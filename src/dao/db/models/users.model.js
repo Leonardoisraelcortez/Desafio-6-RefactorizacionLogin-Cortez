@@ -18,6 +18,10 @@ password: {
     type: String,
     required: true,
 },
+from_github: {
+    type: Boolean,
+    default: false,
+},
 });
 
 export const usersModel = mongoose.model("Users", usersSchema);

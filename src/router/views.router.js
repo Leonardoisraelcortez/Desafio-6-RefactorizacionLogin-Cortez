@@ -43,5 +43,9 @@ try {
 }
 });
 
+viewsRouter.get("/error", (req, res) => {
+    res.render("error");
+});
+
 export default viewsRouter;
 
