@@ -94,6 +94,9 @@ try {
 app.use('/api/products', productsRouter);
 app.use('/api/carts', cartsRouter);
 
+app.use(passport.initialize());
+app.use(passport.session());
+
 const PORT = 3000;
 
 const httpServer = app.listen(PORT, () => {
